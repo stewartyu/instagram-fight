@@ -34,11 +34,19 @@ router.get('/', function (req, res) {
         instagramApi.use({ access_token: req.cookies.instaToken });
         return instagramApi.tag_media_recentAsync('chip', { count: 50 })
         .then(function(images) {
+            var extractImage = function (images) {
+                var index = Math.floor(Math.random() * images.length - 1) + 1;
+                var image = images[index];
+
+                images = images.splice(index, 1);
+
+                return image;
+            };
             // get 3 random images
             return Bluebird.all([
-                images[Math.floor(Math.random() * images.length -1) + 1],
-                images[Math.floor(Math.random() * images.length -1) + 1],
-                images[Math.floor(Math.random() * images.length -1) + 1]
+                extractImage(images),
+                extractImage(images),
+                extractImage(images)
             ]);
         })
         .spread(function (image1, image2, image3) {
