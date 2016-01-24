@@ -1,0 +1,25 @@
+{
+  "name": "instagram-fight",
+  "version": "1.0.0",
+  "description": "Fight!",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stewartyu/instagram-fight.git"
+  },
+  "author": "Stewart Yu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stewartyu/instagram-fight/issues"
+  },
+  "homepage": "https://github.com/stewartyu/instagram-fight#readme",
+  "dependencies": {
+    "bluebird": "^3.1.2",
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "instagram-node": "^0.5.8",
+    "jade": "^1.11.0"
+  }
+}
