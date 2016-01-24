@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Fight!",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "run": "node index.js",
+    "watch": "nodemon index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/stewartyu/instagram-fight.git"
