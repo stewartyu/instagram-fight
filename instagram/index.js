@@ -45,15 +45,13 @@ router.get('/', function (req, res) {
             // get 3 random images
             return Bluebird.all([
                 extractImage(images),
-                extractImage(images),
                 extractImage(images)
             ]);
         })
-        .spread(function (image1, image2, image3) {
+        .spread(function (image1, image2) {
             res.render('index', {
                 image1: image1.images.standard_resolution.url,
                 image2: image2.images.standard_resolution.url,
-                image3: image3.images.standard_resolution.url,
                 access_token: req.cookies.instaToken
             });
         })

@@ -10,12 +10,10 @@ block content
         a(href="/authorize-user" class="btn btn-primary") Login to Instagram
   else
     div.row
-      div.col-md-6
-        h1 Preview
-        div.postcard-preview.clearfix
-          img(src= image1, width="250px", class='image1')
-          img(src= image2, width="250px", class='image2')
-          img(src= image3, width="250px", class='image3')
+      div
+        div.postcard-preview.clearfix.row
+          img(src= image1, width="250px", class='col-md-2')
+          img(src= image2, width="250px", class='col-md-2')
         div.text-center
           br
           a.btn.btn-default(href="/") New Random Images
