@@ -36,15 +36,18 @@ router.get('/handleauth', function (req, res) {
     });
 });
 
-router.get('/api/images', function (req, res) {
+router.get('/api/images', function (req, res, next) {
     instagramApi.use({ access_token: req.cookies.instaToken });
     return instagramApi.tag_media_recentAsync('chip', { count: 50 })
     .then(function(images) {
         var insertImage = function (image) {
             async.waterfall([
                 function(callback) {
-                    Image.findOne({ imageId: image.id }, function(err) {
-                        callback(err, image);
+                    Image.findOne({ imageId: image.id }, function(err, result) {
+                        if (result === null) {
+                            // image not in db, so create it
+                            callback(err, image);
+                        }
                     });
                 },
                 function(image) {
@@ -80,51 +83,32 @@ router.get('/api/images', function (req, res) {
 });
 
 router.put('/api/images', function(req, res, next) {
-  var winner = req.body.winner;
+    console.log(req);
+    var winner = req.body.winner;
 
-  if (!winner) {
-    return res.status(400).send({ message: 'Voting requires a winner.' });
-  }
+    if (!winner) {
+        return res.status(400).send({ message: 'Voting requires a winner.' });
+    }
 
-  async.parallel([
-      function(callback) {
-        Image.findOne({ imageId: winner.id }, function(err, winner) {
-          callback(err, winner);
-        });
-      }
-    ],
-    function(err, results) {
-      if (err) return next(err);
-
-      var winner = results[0];
-
-      if (!winner) {
-          // image not stored yet, so let's create it
-          var image = new Image({
-            imageId: characterId,
-            url: image.images.standard_resolution.url,
-            random: [Math.random(), 0]
-          });
-
-          image.save(function(err) {
-            if (err) return next(err);
-            res.send({ message: 'Image has been added successfully!' });
-          });
-      }
-
-      async.parallel([
+    async.waterfall([
         function(callback) {
-          winner.votes++;
-          winner.random = [Math.random(), 0];
-          winner.save(function(err) {
-            callback(err);
-          });
+            console.log('put');
+            console.log(winner);
+            Image.findOne({ imageId: winner.id }, function(err, image) {
+                console.log('cb');
+                console.log(image);
+                callback(err, image);
+            });
+        },
+        function(image) {
+            console.log('save');
+            image.votes++;
+            image.random = [Math.random(), 0];
+            image.save(function(err) {
+              callback(err);
+            });
         }
-      ], function(err) {
-        if (err) return next(err);
-        res.status(200).end();
-      });
-    });
+    ]);
 });
 
 /* Index Page */

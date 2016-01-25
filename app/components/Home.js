@@ -26,7 +26,6 @@ class Home extends React.Component {
   }
 
   handleClick(image) {
-    console.log(image);
     HomeActions.vote(image);
   }
 
