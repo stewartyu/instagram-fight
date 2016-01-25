@@ -2,6 +2,14 @@
     box-sizing: border-box;
 }
 
+html {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
 .clearfix {
     *zoom: 1;
     &:after {
@@ -12,8 +20,22 @@
     }
 }
 
+header {
+    .clearfix;
+}
+
+.header__logo {
+    display: block;
+    width: 40%;
+}
+
 .vote {
     .clearfix;
+}
+
+.vote__header {
+    font-size: 20px;
+    text-align: center;
 }
 
 .vote__image-container {
@@ -29,16 +51,20 @@
 }
 
 .vote__image {
-    max-width: 100%;
     padding: 10px;
 }
 
-
+.list {
+    text-align: center;
+}
 
 .list__item-container {
     .clearfix;
 
     position: relative;
+
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .list__item-rank {
@@ -46,23 +72,23 @@
 }
 
 .list__item-image {
-    max-width: 100%;
     padding: 20px;
 }
 
 .list__item-wins {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
 
     display: block;
-    width: 25px;
-    height: 25px;
+    width: 50px;
+    height: 50px;
 
-    border-radius: 25px;
+    border-radius: 50px;
     background-color: #aaa;
 
     color: #fff;
-    line-height: 25px;
+    font-size: 30px;
+    line-height: 43px;
     text-align: center;
 }

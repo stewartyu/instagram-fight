@@ -6,8 +6,8 @@ class App extends React.Component {
         return (
             <div>
                 <header>
-                    <Link to="/">Instagram Fight</Link>
-                    <Link to="/popular">Most Popular</Link>
+                    <Link to="/" className="header__logo"><img src="/img/logo.png" /></Link>
+                    <Link to="/popular" className="header__popular">Most Popular</Link>
                 </header>
                 {this.props.children}
             </div>

@@ -2,11 +2,12 @@ extends layout
 
 block content
 
-  if showLogin
-    div.row
-      div.col-md-12.text-center
-        h1 Instagram Fight!
-        p In order to use the demo you must first authorize Instagram.
+    if showLogin
+        header
+            a(href="/").header__logo
+                img(src="/img/logo.png")
+        
+        p In order to use Instagram Fight, you must first authorize Instagram.
         a(href="/authorize-user" class="btn btn-primary") Login to Instagram
-  else
-    div#app
+    else
+        div#app

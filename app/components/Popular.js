@@ -35,7 +35,7 @@ class Popular extends React.Component {
     });
 
     return (
-        <div className='container'>
+        <div className="container">
             <div className="list">{images}</div>
         </div>
     );

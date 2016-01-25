@@ -102,7 +102,7 @@ gulp.task('styles', function() {
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(gulpif(production, cssmin()))
+    .pipe(cssmin())
     .pipe(gulp.dest('public/css'));
 });
 

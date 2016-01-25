@@ -38,7 +38,10 @@ class Home extends React.Component {
 
     return (
         <div className='container'>
-            <div className="vote">{images}</div>
+            <div className="vote">
+                <div className="vote__header">Vote!</div>
+                {images}
+            </div>
         </div>
     );
   }
