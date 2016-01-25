@@ -1,0 +1,23 @@
+img {
+  max-width: 100%;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.vote {
+  *zoom: 1;
+}
+.vote:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.vote__image {
+  float: left;
+  width: 50%;
+}
