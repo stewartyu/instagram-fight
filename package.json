@@ -4,7 +4,7 @@
   "description": "Fight!",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js",
+    "start": "node index.js",
     "watch": "nodemon index.js",
     "postinstall": "gulp build"
   },
