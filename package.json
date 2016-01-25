@@ -6,7 +6,7 @@
   "scripts": {
     "run": "node index.js",
     "watch": "nodemon index.js",
-    "postinstall": "bower install && gulp build"
+    "postinstall": "gulp build"
   },
   "babel": {
     "presets": [
