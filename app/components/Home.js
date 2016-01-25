@@ -37,15 +37,6 @@ class Home extends React.Component {
             </div>
         );
     });
-    /*var images = '';
-    if (this.state.images.hasOwnProperty('image1')) {
-        var image1 = this.state.images.image1.images.standard_resolution.url;
-        var image2 = this.state.images.image2.images.standard_resolution.url;
-        images = <div className="vote">
-            <div className="vote__image"><img src={image1} /></div>
-            <div className="vote__image"><img src={image2} /></div>
-        </div>;
-    }*/
 
     return (
       <div className='container'>
