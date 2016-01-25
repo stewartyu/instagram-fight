@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
 import HomeStore from '../stores/HomeStore'
 import HomeActions from '../actions/HomeActions';
-import {first, without, findWhere} from 'underscore';
 
 class Home extends React.Component {
 
@@ -32,16 +30,16 @@ class Home extends React.Component {
   render() {
     var images = this.state.images.map((image, index) => {
         return (
-            <div className="vote__image" key={image.id}>
-                <img src={image.images.standard_resolution.url} onClick={this.handleClick.bind(this, image)} />
-            </div>
+            <a className="vote__image-container" key={image.id}>
+                <img className="vote__image" src={image.images.standard_resolution.url} onClick={this.handleClick.bind(this, image)} />
+            </a>
         );
     });
 
     return (
-      <div className='container'>
-        <div className="vote">{images}</div>
-      </div>
+        <div className='container'>
+            <div className="vote">{images}</div>
+        </div>
     );
   }
 }

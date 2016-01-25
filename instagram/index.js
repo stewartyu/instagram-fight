@@ -106,6 +106,21 @@ router.put('/api/images', function(req, res, next) {
     ]);
 });
 
+router.get('/api/popular', function (req, res) {
+    Image
+        .find()
+        .sort({'wins': -1})
+        .exec(function(err, images) {
+            if (err) return next(err);
+
+            return res.send(images);
+        });
+});
+
+router.get('/popular', function (req, res) {
+    res.render('index', {});
+});
+
 /* Index Page */
 router.get('/', function (req, res) {
     if (req.cookies.instaToken) {

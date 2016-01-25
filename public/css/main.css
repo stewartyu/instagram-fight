@@ -1,5 +1,5 @@
-img {
-  max-width: 100%;
+* {
+  box-sizing: border-box;
 }
 .clearfix {
   *zoom: 1;
@@ -17,7 +17,16 @@ img {
   display: table;
   clear: both;
 }
-.vote__image {
+.vote__image-container {
+  display: block;
   float: left;
   width: 50%;
+  border-radius: 3px;
+}
+.vote__image-container:hover {
+  background-color: #eee;
+}
+.vote__image {
+  max-width: 100%;
+  padding: 10px;
 }
