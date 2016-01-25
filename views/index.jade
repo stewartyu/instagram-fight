@@ -5,15 +5,8 @@ block content
   if showLogin
     div.row
       div.col-md-12.text-center
-        h1 Create a Postcard with your Instagram Photos
+        h1 Instagram Fight!
         p In order to use the demo you must first authorize Instagram.
         a(href="/authorize-user" class="btn btn-primary") Login to Instagram
   else
-    div#app.row
-      div
-        div.postcard-preview.clearfix.row
-          img(src= image1, width="250px", class='col-md-2')
-          img(src= image2, width="250px", class='col-md-2')
-        div.text-center
-          br
-          a.btn.btn-default(href="/") New Random Images
+    div#app
