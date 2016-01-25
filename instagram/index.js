@@ -28,35 +28,34 @@ router.get('/handleauth', function (req, res) {
     });
 });
 
+router.get('/api/images', function (req, res) {
+    instagramApi.use({ access_token: req.cookies.instaToken });
+    return instagramApi.tag_media_recentAsync('chip', { count: 50 })
+    .then(function(images) {
+        var extractImage = function (images) {
+            var index = Math.floor(Math.random() * images.length - 1) + 1;
+            var image = images[index];
+
+            images = images.splice(index, 1);
+
+            return image;
+        };
+
+        res.send({
+            image1: extractImage(images),
+            image2: extractImage(images)
+        });
+    })
+    .catch(function (errors) {
+        console.log(errors);
+    });
+});
+
 /* Index Page */
 router.get('/', function (req, res) {
     if (req.cookies.instaToken) {
-        instagramApi.use({ access_token: req.cookies.instaToken });
-        return instagramApi.tag_media_recentAsync('chip', { count: 50 })
-        .then(function(images) {
-            var extractImage = function (images) {
-                var index = Math.floor(Math.random() * images.length - 1) + 1;
-                var image = images[index];
-
-                images = images.splice(index, 1);
-
-                return image;
-            };
-            // get 3 random images
-            return Bluebird.all([
-                extractImage(images),
-                extractImage(images)
-            ]);
-        })
-        .spread(function (image1, image2) {
-            res.render('index', {
-                image1: image1.images.standard_resolution.url,
-                image2: image2.images.standard_resolution.url,
-                access_token: req.cookies.instaToken
-            });
-        })
-        .catch(function (errors) {
-            console.log(errors);
+        res.render('index', {
+            access_token: req.cookies.instaToken
         });
     } else {
         res.render('index', {
