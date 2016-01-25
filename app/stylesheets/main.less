@@ -22,11 +22,21 @@ img {
 
 header {
     .clearfix;
+
+    position: relative;
 }
 
 .header__logo {
     display: block;
-    width: 40%;
+    width: 200px;
+}
+
+.header__popular {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    font-size: 20px;
 }
 
 .vote {
@@ -34,8 +44,9 @@ header {
 }
 
 .vote__header {
-    font-size: 20px;
+    font-size: 50px;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .vote__image-container {
