@@ -37,49 +37,53 @@ router.get('/handleauth', function (req, res) {
 });
 
 router.get('/api/images', function (req, res, next) {
-    instagramApi.use({ access_token: req.cookies.instaToken });
-    return instagramApi.tag_media_recentAsync('chip', { count: 50 })
-    .then(function(images) {
-        var insertImage = function (image) {
-            async.waterfall([
-                function(callback) {
-                    Image.findOne({ imageId: image.id }, function(err, result) {
-                        if (result === null) {
-                            // image not in db, so create it
-                            callback(err, image);
-                        }
-                    });
-                },
-                function(image) {
-                    var image = new Image({
-                        imageId: image.id,
-                        url: image.images.standard_resolution.url,
-                        random: [Math.random(), 0]
-                    });
+    if (req.cookies.instaToken) {
+        instagramApi.use({ access_token: req.cookies.instaToken });
+        return instagramApi.tag_media_recentAsync('chip', { count: 50 })
+        .then(function(images) {
+            var insertImage = function (image) {
+                async.waterfall([
+                    function(callback) {
+                        Image.findOne({ imageId: image.id }, function(err, result) {
+                            if (result === null) {
+                                // image not in db, so create it
+                                callback(err, image);
+                            }
+                        });
+                    },
+                    function(image) {
+                        var image = new Image({
+                            imageId: image.id,
+                            url: image.images.standard_resolution.url,
+                            random: [Math.random(), 0]
+                        });
 
-                    image.save(function(err) {
-                        if (err) return next(err);
-                    });
-                }
-            ]);
-        };
+                        image.save(function(err) {
+                            if (err) return next(err);
+                        });
+                    }
+                ]);
+            };
 
-        var extractImage = function (images) {
-            var index = Math.floor(Math.random() * images.length - 1) + 1;
-            var image = images[index];
+            var extractImage = function (images) {
+                var index = Math.floor(Math.random() * images.length - 1) + 1;
+                var image = images[index];
 
-            images = images.splice(index, 1);
+                images = images.splice(index, 1);
 
-            insertImage(image);
+                insertImage(image);
 
-            return image;
-        };
+                return image;
+            };
 
-        res.send([extractImage(images), extractImage(images)]);
-    })
-    .catch(function (errors) {
-        console.log(errors);
-    });
+            res.send([extractImage(images), extractImage(images)]);
+        })
+        .catch(function (errors) {
+            console.log(errors);
+        });
+    } else {
+        res.redirect('/');
+    }
 });
 
 router.put('/api/images', function(req, res, next) {
