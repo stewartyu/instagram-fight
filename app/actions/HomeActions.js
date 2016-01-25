@@ -23,7 +23,7 @@ class HomeActions {
     $.ajax({
       type: 'PUT',
       url: '/api/images' ,
-      data: { winner: winner }
+      data: { winner: winner.id }
     })
       .done(() => {
         this.actions.getTwoImages();

@@ -83,7 +83,6 @@ router.get('/api/images', function (req, res, next) {
 });
 
 router.put('/api/images', function(req, res, next) {
-    console.log(req);
     var winner = req.body.winner;
 
     if (!winner) {
@@ -92,20 +91,16 @@ router.put('/api/images', function(req, res, next) {
 
     async.waterfall([
         function(callback) {
-            console.log('put');
-            console.log(winner);
-            Image.findOne({ imageId: winner.id }, function(err, image) {
-                console.log('cb');
-                console.log(image);
+            Image.findOne({ imageId: winner }, function(err, image) {
                 callback(err, image);
             });
         },
         function(image) {
-            console.log('save');
-            image.votes++;
+            image.wins++;
             image.random = [Math.random(), 0];
             image.save(function(err) {
-              callback(err);
+                if (err) return next(err);
+                res.send({ message: 'You voted successfully!' });
             });
         }
     ]);
