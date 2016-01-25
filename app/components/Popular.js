@@ -26,16 +26,17 @@ class Popular extends React.Component {
   render() {
     var images = this.state.images.map((image, index) => {
         return (
-            <a className="vote__image-container" key={image.imageId}>
-                <img className="vote__image" src={image.url} />
-                <span>{image.wins}</span>
-            </a>
+            <div className="list__item-container" key={image.imageId}>
+                <span className="list__item-rank">{index + 1}</span>
+                <img className="list__item-image" src={image.url} />
+                <span className="list__item-wins">{image.wins}</span>
+            </div>
         );
     });
 
     return (
         <div className='container'>
-            <div className="vote">{images}</div>
+            <div className="list">{images}</div>
         </div>
     );
   }
