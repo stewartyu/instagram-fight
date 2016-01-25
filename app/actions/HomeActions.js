@@ -19,11 +19,11 @@ class HomeActions {
       });
   }
 
-  vote(winner, loser) {
+  vote(winner) {
     $.ajax({
       type: 'PUT',
       url: '/api/images' ,
-      data: { winner: winner, loser: loser }
+      data: { winner: winner }
     })
       .done(() => {
         this.actions.getTwoImages();

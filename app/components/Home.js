@@ -25,14 +25,20 @@ class Home extends React.Component {
     this.setState(state);
   }
 
-  handleClick(character) {
-    var winner = character.characterId;
-    var loser = first(without(this.state.characters, findWhere(this.state.characters, { characterId: winner }))).characterId;
-    HomeActions.vote(winner, loser);
+  handleClick(image) {
+    console.log(image);
+    HomeActions.vote(image);
   }
 
   render() {
-    var images = '';
+    var images = this.state.images.map((image, index) => {
+        return (
+            <div className="vote__image" key={image.id}>
+                <img src={image.images.standard_resolution.url} onClick={this.handleClick.bind(this, image)} />
+            </div>
+        );
+    });
+    /*var images = '';
     if (this.state.images.hasOwnProperty('image1')) {
         var image1 = this.state.images.image1.images.standard_resolution.url;
         var image2 = this.state.images.image2.images.standard_resolution.url;
@@ -40,11 +46,11 @@ class Home extends React.Component {
             <div className="vote__image"><img src={image1} /></div>
             <div className="vote__image"><img src={image2} /></div>
         </div>;
-    }
+    }*/
 
     return (
       <div className='container'>
-        {images}
+        <div className="vote">{images}</div>
       </div>
     );
   }
